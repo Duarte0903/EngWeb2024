@@ -8,6 +8,6 @@ Aqui serão armazenados todos os trabalhos da Unidade Curricular de Engenharia W
 
 - **Nome:** Duarte Machado Leitão
 - **ID:** A100550
-- **Foto:** 
-![Fotografia do aluno](duarte.jpg){ width=50% }
+- **Foto:**
+<img src="duarte.jpg"  width="50%" />
 

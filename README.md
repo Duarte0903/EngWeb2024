@@ -1,8 +1,10 @@
 # EngWeb2024
 
-## Introdução 
+## Unidade Curricular
 
-Aqui serão armazenados todos os trabalhos da Unidade Curricular de Engenharia Web do 3º ano de Engenharia Informática da Universidade do Minho.
+- **Nome:** Engenharia Web
+- **Sigla:** EW
+- **Ano:** 2024
 
 ## Aluno
 

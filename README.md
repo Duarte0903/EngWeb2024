@@ -2,7 +2,7 @@
 
 ## Introdução 
 
-Aqui serão armazenados todos os trabalhos da Unidade Curricular de Engenharia Web.
+Aqui serão armazenados todos os trabalhos da Unidade Curricular de Engenharia Web do 3º ano de Engenharia Informática da Universidade do Minho.
 
 ## Aluno
 

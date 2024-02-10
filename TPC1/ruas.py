@@ -16,7 +16,7 @@ html = '''
     <link rel="stylesheet" href="../rua.css">
 </head>
 <body>
-    <h1>Ruas de Braga</h1>
+    <a href="../index.html" style="text-decoration: none; color: black;"><h1>Ruas de Braga</h1></a>
 '''
 
 template = html
@@ -68,17 +68,30 @@ for file in os.listdir(path_xml_ruas):
                 for child_elem in paragrafo:
                     if child_elem.tag == 'lugar':
                         lugar_text = child_elem.text.strip() if child_elem.text else ''
-                        para_text += f' <a href="{lugar_text}.html">{lugar_text}</a>'
+                        if os.path.exists(f"./html/{lugar_text}.html"):  # verifica se existe um ficheiro html para o lugar
+                            para_text += f' <a href="{lugar_text}.html">{lugar_text}</a> '
+                        else:
+                            para_text += f' {lugar_text} '
+                        if child_elem.tail:
+                            para_text += child_elem.tail.strip()
 
                     elif child_elem.tag == 'data':
                         data_text = child_elem.text.strip() if child_elem.text else ''
-                        para_text += f' {data_text}'
+                        para_text += f' {data_text} '
+                        if child_elem.tail:
+                            para_text += child_elem.tail.strip()
 
                     elif child_elem.tag == 'entidade' and child_elem.get('tipo') == 'instituição':
                         entidade_text = child_elem.text.strip() if child_elem.text else ''
                         para_text += f' {entidade_text}'
+                        if child_elem.tail:
+                            para_text += child_elem.tail.strip()
 
-                # Append the processed paragraph to the list
+                    else:
+                        para_text += f' {child_elem.text.strip()}'
+                        if child_elem.tail:
+                            para_text += child_elem.tail.strip()
+
                 rua_paragrafos.append(para_text)
             
             # lista de casas

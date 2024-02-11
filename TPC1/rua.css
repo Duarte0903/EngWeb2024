@@ -7,10 +7,20 @@ h1, h2, h3 {
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
+    width: 100%;
 }
 
 img {
-    max-width: 50%;
+    width: 80%;
+}
+
+.imagem-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 5px;
+    width: 50%;
 }
 
 table {
@@ -27,4 +37,9 @@ th, td {
 
 .header {
     background-color: #f2f2f2;
+}
+
+p {
+    text-align: justify;
+    margin: 20px;
 }

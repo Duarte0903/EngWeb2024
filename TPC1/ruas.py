@@ -46,19 +46,29 @@ for file in os.listdir(path_xml_ruas):
             rua_name = rua_element.text
 
             # caminho das imagens
-            rua_imagens = []
-            for img in root.findall('.//imagem'):
-                path_element = img.get('path')
-                filename, file_extension = os.path.splitext(os.path.basename(path_element))
+            rua_imagens = {}
+            for figura in root.findall('.//figura'):
+                imagem = figura.find('imagem')
+                path = imagem.get('path')
+                filename, file_extension = os.path.splitext(os.path.basename(path))
                 image_path = f"../MapaRuas-materialBase/imagem/{filename}{file_extension}"
-                rua_imagens.append(image_path)
+
+                # legenda de cada imagem
+                legenda = figura.find('legenda').text
+                rua_imagens[image_path] = legenda
 
             # imagens da vista atual
             path_vistas_atuais = "./MapaRuas-materialBase/atual/"
             for img in os.listdir(path_vistas_atuais):
                 if rua_name.replace(" ", "") in img:
                     vista_atual_path = f"{path_vistas_atuais}{img}"
-                    rua_imagens.append("." + vista_atual_path)
+                    if "Vista1" in vista_atual_path: 
+                        legenda = f"{rua_name} - Vista 1"
+                    elif "Vista2" in vista_atual_path: 
+                        legenda = f"{rua_name} - Vista 2"
+                    else: 
+                        legenda = rua_name
+                    rua_imagens['.' + vista_atual_path] = legenda
 
             # descricao da rua
             rua_paragrafos = []
@@ -112,8 +122,11 @@ for file in os.listdir(path_xml_ruas):
             rua_html += f'<h1>{rua_name}</h1>'
 
             rua_html += '<div class="imagens-container">'
-            for imagem in rua_imagens:
+            for imagem, legenda in rua_imagens.items():
+                rua_html += '<div class="imagem-container">'
                 rua_html += f'<img src="{imagem}" alt="{rua_name}">'
+                rua_html += f'<p>{legenda}</p>'
+                rua_html += '</div>'
             rua_html += '</div>'
 
             rua_html += "<h2>Descrição</h2>"

@@ -25,6 +25,7 @@ path_xml_ruas = "./MapaRuas-materialBase/texto/"
 
 html += "<ul>"
 
+ruas = {}
 for file in os.listdir(path_xml_ruas):
     if file.endswith(".xml"):
         file_path = os.path.join(path_xml_ruas, file)
@@ -43,7 +44,8 @@ for file in os.listdir(path_xml_ruas):
         # Extrair as ruas 
         rua_element = root.find('.//nome')
         if rua_element is not None:
-            rua_name = rua_element.text
+            rua_name = rua_element.text.strip()
+            ruas[rua_name] = file_path
 
             # caminho das imagens
             rua_imagens = {}
@@ -114,9 +116,6 @@ for file in os.listdir(path_xml_ruas):
                     casa_info[1] = casa_info[1].text
                 rua_casas.append(casa_info)
 
-            # Adicionar rua ao index
-            html += f'<li><a href="./html/{rua_name}.html">{rua_name}</a></li>\n'
-
             # criar pagina para cada rua
             rua_html = template
             rua_html += f'<h1>{rua_name}</h1>'
@@ -158,6 +157,11 @@ for file in os.listdir(path_xml_ruas):
             file = open(file_path, "w", encoding="utf-8")
             file.write(rua_html)
             file.close()
+
+ruas = sorted(ruas.keys())
+
+for rua in ruas:
+    html += f"<li><a href=\"./html/{rua}.html\">{rua}</a></li>"
 
 html += "</ul>"
 

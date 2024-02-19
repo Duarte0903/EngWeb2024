@@ -161,7 +161,7 @@ for file in os.listdir(path_xml_ruas):
 ruas = sorted(ruas.keys())
 
 for rua in ruas:
-    html += f"<li><a href=\"./html/{rua}.html\">{rua}</a></li>"
+    html += f"<li><a href=\"./html/{rua}.html\">{rua}</a></li>\n"
 
 html += "</ul>"
 

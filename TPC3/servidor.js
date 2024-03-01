@@ -86,7 +86,7 @@ http.createServer((req, res) => {
                 res.end();
             })
 
-    // Pagina de um genero (Nao funciona)
+    // Pagina de um genero
     } else if (q.pathname.match(/\/generos\/(\w+)/)) {
         let gen = q.pathname.substring(9)
         var generoFormat = gen.replace(/%20/g, " ")

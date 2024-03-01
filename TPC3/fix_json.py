@@ -11,19 +11,21 @@ def fix_json(data):
     for line in lines:
         try:
             entry = json.loads(line)
-            new_data.append(entry)
 
             if 'genres' in entry:
-                generos_set.update(genre for genre in entry['genres'] if genre and genre not in generos_set)
+                generos_set.update(genre for genre in entry['genres'] if genre)
 
             if 'cast' in entry:
-                atores_set.update(actor for actor in entry['cast'] if actor and actor not in atores_set)
+                atores_set.update(actor for actor in entry['cast'] if actor)
+
+            if entry.get('cast') and entry.get('genres'):
+                new_data.append(entry)
 
         except json.JSONDecodeError as e:
             print(f"Error decoding JSON: {e}. Skipping line: {line}")
 
-    atores = [{"id": f"a{i}", "nome": actor} for i, actor in enumerate(atores_set, 1)]
-    generos = [{"id": f"g{i}", "nome": genre} for i, genre in enumerate(generos_set, 1)]
+    atores = [{"nome": actor} for actor in atores_set]
+    generos = [{"nome": genre} for genre in generos_set]
 
     return new_data, atores, generos
 

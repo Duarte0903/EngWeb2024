@@ -40,15 +40,32 @@ function genPagFilme(dados) {
         <head>
             <title>Filme</title>
             <meta charset="utf-8"/>
-            <link rel="stylesheet" href="w3.css">
+            <link rel="stylesheet" href="/w3.css">
         </head>
         <body>
-            <div class="w3-container w3-teal">
-                <h2>${dados.title}</h2>
+            <div class="w3-center w3-container w3-teal">
+                <h2>${dados[0]['title']}</h2>
             </div>
             <div class="w3-container">
-                <p><b>Ano:</b> ${dados.year}</p>
-            </div>
+                <p><b>Ano:</b> ${dados[0]['year']}</p>
+                <p<<b>Elenco:</b></p>
+        `
+
+        for (ator in dados[0]['cast']) {
+            pagHTML += "<li><a href='/atores/" + dados[0]['cast'][ator] + "'>" + dados[0]['cast'][ator] + "</a></li>"
+        }
+
+        pagHTML += `
+            <br>
+            <p<<b>Géneros:</b></p>
+        `
+
+        for (genero in dados[0]['genres']) {
+            pagHTML += "<li><a href='/generos/" + dados[0]['genres'][genero] + "'>" + dados[0]['genres'][genero] + "</a></li>"
+        }
+
+        pagHTML += `
+        </div>
         </body>
     </html>
     `
@@ -76,7 +93,7 @@ function genAtores(dados) {
     dados.forEach(ator => {
         pagHTML += `
         <tr>
-            <td><a href="/atores/${ator.id}">${ator.nome}</a></td>
+            <td><a href="/atores/${ator.nome}">${ator.nome}</a></td>
         </tr>
         `
     });
@@ -90,21 +107,27 @@ function genAtores(dados) {
 
 }
 
-function genPagAtor(dados) {
+function genPagAtor(nameFormat, filmes) {
     pagHTML = `
     <html>
         <head>
             <title>Ator</title>
             <meta charset="utf-8"/>
-            <link rel="stylesheet" href="w3.css">
+            <link rel="stylesheet" href="/w3.css">
         </head>
         <body>
-            <div class="w3-container w3-teal">
-                <h2>${dados.nome}</h2>
-            </div>
+            <h1 class="w3-container w3-teal w3-center">${nameFormat}</h1>
             <div class="w3-container">
-                <p><b>Id:</b> ${dados.id}</p>
-                <p><b>Nome:</b> ${dados.nome}</p>
+                <p><b>Filme:</b></p>
+                <ul>
+            `
+
+    for (filme in filmes) {
+        pagHTML += `<li><a href="/filmes/${filmes[filme]._id.$oid}">${filmes[filme].title}</a></li>`
+    }
+
+    pagHTML += `    
+            </ul>
             </div>
         </body>
     </html>
@@ -127,15 +150,13 @@ function genGeneros(dados) {
             <table class="w3-table w3-bordered">
                 <tr>
                     <th>Género</th>
-                    <th>ID</th>
                 </tr>
     `
 
     dados.forEach(genero => {
         pagHTML += `
         <tr>
-            <td><a href='/generos/${genero.id}'>${genero.nome}</a></td>
-            <td>${genero.id}</td>
+            <td><a href='/generos/${genero.nome}'>${genero.nome}</a></td>
         </tr>
         `
     });
@@ -148,32 +169,26 @@ function genGeneros(dados) {
     return pagHTML
 }
 
-function genPagGenero(dados, filmes) {
+function genPagGenero(generoFormat, filmes_genero) {
     pagHTML = `
     <html>
         <head>
             <title>Género</title>
             <meta charset="utf-8"/>
-            <link rel="stylesheet" href="w3.css">
+            <link rel="stylesheet" href="/w3.css">
         </head>
         <body>
-            <div class="w3-container w3-teal">
-                <h2>${dados.nome}</h2>
-            </div>
-            <div class="w3-container">
-                <p><b>ID:</b> ${dados.id}</p>
-                <p><b>Nome:</b> ${dados.nome}</p>
+            <div class="w3-center w3-container w3-teal">
+                <h2>${generoFormat}</h2>
             </div>
             <div class="w3-container">
                 <h3>Filmes:</h3>
                 <ul>
     `
 
-    filmes.forEach(filme => {
-        pagHTML += `
-        <li><a href="/filmes/${filme._id.$oid}">${filme.title}</a></li>
-        `
-    });
+    for (filme in filmes_genero) {
+        pagHTML += `<li><a href="/filmes/${filmes_genero[filme]._id.$oid}">${filmes_genero[filme].title}</a></li>`
+    }
 
     pagHTML += `
                 </ul>

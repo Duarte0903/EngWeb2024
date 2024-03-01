@@ -30,11 +30,11 @@ http.createServer((req, res) => {
                 res.end();
             })
 
-    // Pagina de um filme (Nao funciona)
-    } else if (q.pathname.startsWith("/filmes/")) {
-        var id = req.url.split("/")[2];
-        axios.get("http://localhost:3000/filmes/" + id)
-            .then((resp) => {              
+    // Pagina de um filme
+    } else if (q.pathname.match(/\/filmes\/\w+/)) {
+        var id = q.pathname.substring(8)
+        axios.get("http://localhost:3000/filmes?_id.$oid=" + id)
+            .then(resp => {              
                 res.write(pages.genPagFilme(resp.data));
                 res.end();
             })
@@ -44,7 +44,7 @@ http.createServer((req, res) => {
                 res.end();
             })
     
-    // Listagem dos atores (Meter mais informacao e melhorar pagina)
+    // Listagem dos atores
     } else if (req.url == '/atores') {
         axios.get("http://localhost:3000/atores")
             .then(resp => {
@@ -56,12 +56,15 @@ http.createServer((req, res) => {
                 res.write("<p>Erro: " + erro + "</p>");
                 res.end();
             })
-
-    } else if (q.pathname.startsWith("/atores/")) {
-        var id = req.url.split("/")[2];
-        axios.get("http://localhost:3000/atores/" + id)
-            .then((resp) => {
-                res.write(pages.genPagAtor(resp.data));
+    
+    // Pagina de um ator
+    } else if (q.pathname.match(/\/atores\/\w+([\'|\`\w]+)?/)) {
+        var nome = q.pathname.substring(8)
+        var nameFormat = nome.replace(/%20/g, " ")
+        axios.get("http://localhost:3000/filmes")
+            .then(resp => {
+                var filmes = resp.data.filter(filme => filme.cast.includes(nameFormat))
+                res.write(pages.genPagAtor(nameFormat, filmes));
                 res.end();
             })
             .catch(erro => {
@@ -84,13 +87,13 @@ http.createServer((req, res) => {
             })
 
     // Pagina de um genero (Nao funciona)
-    } else if (q.pathname.startsWith("/generos/")) {
-        var id = req.url.split("/")[2];
-        filmes_genero = axios.get("http://localhost:3000/filmes?genre=" + id);
-        console.log(filmes_genero);
-        axios.get("http://localhost:3000/generos/" + id)
-            .then((resp) => {
-                res.write(pages.genPagGenero(resp.data, filmes_genero.data));
+    } else if (q.pathname.match(/\/generos\/(\w+)/)) {
+        let gen = q.pathname.substring(9)
+        var generoFormat = gen.replace(/%20/g, " ")
+        axios.get('http://localhost:3000/filmes')
+            .then(resp => {
+                var filmes_genero = resp.data.filter(filme => filme.genres.includes(generoFormat))
+                res.write(pages.genPagGenero(generoFormat, filmes_genero));
                 res.end();
             })
             .catch(erro => {

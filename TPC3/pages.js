@@ -48,7 +48,7 @@ function genPagFilme(dados) {
             </div>
             <div class="w3-container">
                 <p><b>Ano:</b> ${dados[0]['year']}</p>
-                <p<<b>Elenco:</b></p>
+                <p><b>Elenco:</b></p>
         `
 
         for (ator in dados[0]['cast']) {
@@ -57,7 +57,7 @@ function genPagFilme(dados) {
 
         pagHTML += `
             <br>
-            <p<<b>Géneros:</b></p>
+            <p><b>Géneros:</b></p>
         `
 
         for (genero in dados[0]['genres']) {

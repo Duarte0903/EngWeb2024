@@ -16,4 +16,4 @@ Criar uma aplicação para a gestão de uma base de dados de compositores musica
     - CRUD sobre periodos musicais.
 - Investigar e inserir pelo menos 5 compositores do período moderno ou serialista.
 
-**Nota:** a aplicaçáo deve ser feita com recursos à framework Express.js
+**Nota:** a aplicação deve ser feita com recursos à framework Express.js

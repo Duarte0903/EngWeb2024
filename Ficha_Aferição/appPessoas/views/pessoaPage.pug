@@ -1,0 +1,87 @@
+extends layout 
+
+block content
+    .w3-card-4
+        header.w3-container.w3-teal
+            h1 #{pessoa.nome}
+        .w3-container
+            ul.w3-ul.w3-card-4
+                li 
+                    strong Nome: 
+                    | #{pessoa.nome}
+
+                li  
+                    strong idade: 
+                    | #{pessoa.idade}
+
+                li  
+                    strong sexo: 
+                    | #{pessoa.sexo}
+
+                li
+                    strong cidade: 
+                    | #{pessoa.morada.cidade}
+
+                li
+                    strong distrito: 
+                    | #{pessoa.morada.distrito}
+
+                -if (pessoa.BI != null)        
+                    li
+                        strong BI: 
+                        | #{pessoa.BI}
+
+                -if (pessoa.CC != null)
+                    li
+                        strong CC: 
+                        | #{pessoa.CC}
+
+                li
+                    strong animais:
+                    | 
+                    each animal in pessoa.animais
+                        |  #{animal}
+
+                - if (pessoa.descricao != null)        
+                    li
+                        strong descrição: 
+                        | #{pessoa['descricao']}
+
+                - if (pessoa.partido_politico != null)        
+                    li
+                        strong partido politico: 
+                        | #{pessoa.partido_politico.party_abbr} - #{pessoa.partido_politico.party_name}
+
+                - if (pessoa['religião'] != null)        
+                    li
+                        strong religião: 
+                        | #{pessoa['religião']}
+
+                - if (pessoa.figura_publica_pt != null)        
+                    li
+                        strong figura publica pt: 
+                        | 
+                        each figura in pessoa.figura_publica_pt
+                            |  #{figura}
+
+                - if (pessoa.marca_carro != null)        
+                    li
+                        strong marca carro: 
+                        | #{pessoa.marca_carro}
+
+                -if (pessoa.destinos_favoritos != null)        
+                    li
+                        strong destinos favoritos: 
+                        | 
+                        each destino in pessoa.destinos_favoritos
+                            |  #{destino}
+                        
+                - if (pessoa.atributos != null)
+                    each value, key in pessoa.atributos
+                        - if (typeof value !== 'function' && typeof value !== 'object' && key[0] !== '$')
+                            li
+                                strong #{key}:
+                                |  #{value}
+
+
+                

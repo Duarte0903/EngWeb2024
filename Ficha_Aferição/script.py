@@ -12,5 +12,5 @@ for dataset in datasets:
         pessoas = json.load(file)['pessoas']
         
         for pessoa in pessoas:
-            response = session.post(api_url, json=pessoa)
+            response = requests.post(api_url, json=pessoa)
             print(f"POST {pessoa['nome']}, Response: {response.status_code}")

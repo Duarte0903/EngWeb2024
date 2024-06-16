@@ -1,0 +1,60 @@
+[
+    {
+        "nome": "José Carlos Ramalho",
+        "foto": "jcr-keep.jpeg",
+        "categoria": "Professor/Investigador/Empresário",
+        "filiacao": "Dep. Informática - Universidade do Minho",
+        "email": "jcr@di.uminho.pt",
+        "webpage": "http://www.di.uminho.pt/~jcr",
+        "numero": "746",
+        "nivel": "docente",
+        "ano": "",
+        "cursos": [
+            "Licenciatura em Engenharia Informática"
+        ],
+        "password": "1234",
+        "_id": "666d8c3e0386a84a006ccd68",
+        "cadeiras": [
+            "666d8c3e0386a84a006ccd67",
+            "666d8c3e0386a84a006ccd69",
+            "666d8c3e0386a84a006ccd6b"
+        ]
+    },
+    {
+        "nome": "Tiago Manuel Queirós Barata",
+        "foto": "tiago.jpg",
+        "categoria": "Professor Convidado",
+        "filiacao": "Dep. Informática - Universidade do Minho",
+        "email": "d13753@di.uminho.pt",
+        "numero": "915",
+        "nivel": "docente",
+        "ano": "",
+        "cursos": [
+            "Licenciatura em Engenharia Informática"
+        ],
+        "password": "1234",
+        "_id": "666d8c3e0386a84a006ccd6a",
+        "cadeiras": [
+            "666d8c3e0386a84a006ccd69"
+        ]
+    },
+    {
+        "nome": "Luís Filipe Cunha",
+        "foto": "lfc-di.jpeg",
+        "categoria": "Professor Convidado",
+        "filiacao": "Dep. Informática - Universidade do Minho",
+        "email": "lfc@di.uminho.pt",
+        "webpage": "",
+        "numero": "595",
+        "nivel": "docente",
+        "ano": "",
+        "cursos": [
+            "Licenciatura em Engenharia Informática"
+        ],
+        "password": "1234",
+        "_id": "666d8c3e0386a84a006ccd6c",
+        "cadeiras": [
+            "666d8c3e0386a84a006ccd6b"
+        ]
+    }
+]

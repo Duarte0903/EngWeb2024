@@ -1,0 +1,48 @@
+extends layout
+
+block content
+  header(class="w3-container w3-teal w3-padding-16")
+    h1 Perfil de #{user.nome}
+
+  nav(class="w3-bar w3-light-grey w3-padding-8")
+
+    a(href="/cadeiras" class="w3-bar-item w3-button") Cadeiras
+
+    a(href="/perfil" class="w3-bar-item w3-button") Perfil
+
+    if ( userID == user._id ) || nivel == 'admin'
+      a(href=`/perfil/update/${user._id}` class="w3-bar-item w3-button") Editar
+
+    if nivel == 'aluno'
+      a(href=`/users/${userID}/cadeiras/adicionar` class="w3-bar-item w3-button") Adicionar Cadeira
+
+    a(href="/logout" class="w3-bar-item w3-button") Logout
+
+  div(class="w3-container w3-margin-top")
+    ul(class="w3-ul w3-card-4 w3-padding")
+      li(class="w3-bar w3-padding-16")
+        if user.nivel == 'aluno' 
+          h2 Perfil de Aluno
+        if user.nivel == 'docente'
+          h2 Perfil de Docente  
+        if user.nivel == 'admin'
+          h2 Perfil de Admin
+        
+        p ID: #{user._id}
+        p Nome: #{user.nome}
+        p Email: #{user.email}
+        p Numero: #{user.numero}
+        p Filiação Académica: #{user.filiacao}
+        p Categoria: #{user.categoria}
+        p Webpage: 
+          a(href=user.webpage target="_blank" class="w3-text-teal") #{user.webpage}
+
+      li(class="w3-bar w3-padding-16")
+        h2 Cadeiras:
+        if cadeiras.length > 0
+          ul(class="w3-ul w3-card-4")
+            for cadeira in cadeiras
+              li(class="w3-bar w3-padding-8")
+                a(href=`/cadeiras/${cadeira._id}` class="w3-bar-item w3-text-teal w3-hover-text-black") #{cadeira.titulo}
+        else
+          p Sem cadeiras
